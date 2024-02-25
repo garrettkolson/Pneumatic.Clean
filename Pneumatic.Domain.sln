@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pneumatic.Domain", "Pneumatic.Domain\Pneumatic.Domain.csproj", "{63EB7DFC-7DF2-487B-A993-93DAAD348C62}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pneumatic.Implementations", "Pneumatic.Implementations\Pneumatic.Implementations.csproj", "{63A206CF-3A75-42D0-B9E7-436D3BE078C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{63EB7DFC-7DF2-487B-A993-93DAAD348C62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63EB7DFC-7DF2-487B-A993-93DAAD348C62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63EB7DFC-7DF2-487B-A993-93DAAD348C62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63A206CF-3A75-42D0-B9E7-436D3BE078C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63A206CF-3A75-42D0-B9E7-436D3BE078C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63A206CF-3A75-42D0-B9E7-436D3BE078C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63A206CF-3A75-42D0-B9E7-436D3BE078C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
