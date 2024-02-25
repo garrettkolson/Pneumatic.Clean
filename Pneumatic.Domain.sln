@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pneumatic.Domain", "Pneumatic.Domain\Pneumatic.Domain.csproj", "{63EB7DFC-7DF2-487B-A993-93DAAD348C62}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{63EB7DFC-7DF2-487B-A993-93DAAD348C62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63EB7DFC-7DF2-487B-A993-93DAAD348C62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63EB7DFC-7DF2-487B-A993-93DAAD348C62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63EB7DFC-7DF2-487B-A993-93DAAD348C62}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
