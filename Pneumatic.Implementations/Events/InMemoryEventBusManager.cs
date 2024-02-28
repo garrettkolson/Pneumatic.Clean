@@ -1,5 +1,4 @@
 using System.Collections.Concurrent;
-using System.Security;
 using Pneumatic.Domain;
 using Pneumatic.Domain.Events;
 
@@ -7,18 +6,34 @@ namespace Pneumatic.Implementations.Events;
 
 public class InMemoryEventBusManager : IEventBusManager
 {
+    private readonly ConcurrentDictionary<Type, AsyncEventHandler<DomainEvent>> _eventRegistry = new();
+    
     private readonly ConcurrentDictionary<Type, AsyncEventHandler<DomainEvent>> _addRegistry = new();
     private readonly ConcurrentDictionary<Type, AsyncEventHandler<DomainEvent>> _updateRegistry = new();
     private readonly ConcurrentDictionary<Type, AsyncEventHandler<DomainEvent>> _deleteRegistry = new();
-    
-    public async Task Publish<T>(T entity, EventType type) where T : DomainModel
+
+    public async Task PublishEvent<T>(T @event) where T : DomainEvent
+    {
+        if (!_eventRegistry.TryGetValue(typeof(T), out var handler)) return;
+        await handler.Invoke(this, @event);
+    }
+
+    public async Task SubscribeToEvent<T>(AsyncEventHandler<DomainEvent> handler) where T : DomainEvent
+    {
+        if (!_eventRegistry.TryGetValue(typeof(T), out var typeHandler))
+            _eventRegistry.TryAdd(typeof(T), handler);
+        else
+            typeHandler += handler;
+    }
+
+    public async Task PublishEntityEvent<T>(T entity, EventType type) where T : DomainModel
     {
         if (!getRegistry(type).TryGetValue(typeof(T), out var typeEvent)) return;
         DomainEvent domainEvent = new(entity);
         await typeEvent.Invoke(this, domainEvent);
     }
 
-    public async Task Subscribe<T>(EventType type, AsyncEventHandler<DomainEvent> handler) where T : DomainModel
+    public async Task SubscribeToEntity<T>(EventType type, AsyncEventHandler<DomainEvent> handler) where T : DomainModel
     {
         var registry = getRegistry(type);
         if (!registry.TryGetValue(typeof(T), out var typeHandler))
@@ -33,7 +48,8 @@ public class InMemoryEventBusManager : IEventBusManager
         {
             EventType.Add => _addRegistry,
             EventType.Update => _updateRegistry,
-            EventType.Delete => _deleteRegistry
+            EventType.Delete => _deleteRegistry,
+            _ => throw new ArgumentException($"Event type of {eventType} is invalid.", nameof(eventType))
         };
     }
 }

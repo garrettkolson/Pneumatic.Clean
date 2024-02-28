@@ -4,7 +4,7 @@ namespace Pneumatic.Domain.Events;
 
 public class DomainEvent : EventArgs
 {
-    public DomainModel Entity { get; set; }
+    public DomainModel? Entity { get; set; }
 
     public DomainEvent(DomainModel entity)
     {
