@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Pneumatic.Domain\Pneumatic.Domain.csproj" />
+      <ProjectReference Include="..\Pneumatic.Clean.Domain\Pneumatic.Clean.Domain.csproj" />
     </ItemGroup>
 
 </Project>

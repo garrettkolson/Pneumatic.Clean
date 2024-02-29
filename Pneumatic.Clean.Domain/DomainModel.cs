@@ -1,6 +1,6 @@
-using Pneumatic.Domain.Events;
+using Pneumatic.Clean.Domain.Events;
 
-namespace Pneumatic.Domain;
+namespace Pneumatic.Clean.Domain;
 
 public abstract class DomainModel
 {

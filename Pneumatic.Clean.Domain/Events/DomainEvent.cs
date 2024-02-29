@@ -1,6 +1,6 @@
 using System.Reflection.Metadata;
 
-namespace Pneumatic.Domain.Events;
+namespace Pneumatic.Clean.Domain.Events;
 
 public class DomainEvent : EventArgs
 {

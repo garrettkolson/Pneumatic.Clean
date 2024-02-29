@@ -1,4 +1,4 @@
-namespace Pneumatic.Domain.Events;
+namespace Pneumatic.Clean.Domain.Events;
 
 public interface IEventBusManager
 {

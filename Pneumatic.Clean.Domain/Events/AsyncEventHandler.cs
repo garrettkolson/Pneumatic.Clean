@@ -1,4 +1,4 @@
-namespace Pneumatic.Domain.Events;
+namespace Pneumatic.Clean.Domain.Events;
 
 public delegate Task AsyncEventHandler<in TEvent>(object sender, TEvent @event)
     where TEvent : EventArgs;

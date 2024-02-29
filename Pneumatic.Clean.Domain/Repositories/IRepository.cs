@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 
-namespace Pneumatic.Domain.Repositories;
+namespace Pneumatic.Clean.Domain.Repositories;
 
 public interface IRepository
 {

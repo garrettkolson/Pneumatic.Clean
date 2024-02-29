@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 
-namespace Pneumatic.Domain.Repositories;
+namespace Pneumatic.Clean.Domain.Repositories;
 
 // TODO: be sure to implement SemaphoreSlim around any EF context access
 public interface IDatabaseContext

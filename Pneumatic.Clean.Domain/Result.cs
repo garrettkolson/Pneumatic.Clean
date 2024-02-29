@@ -1,4 +1,4 @@
-namespace Pneumatic.Domain;
+namespace Pneumatic.Clean.Domain;
 
 public record Result<T>(T? Ok, Exception? Error)
 {

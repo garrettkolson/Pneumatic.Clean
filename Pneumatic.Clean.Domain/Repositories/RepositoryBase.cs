@@ -1,8 +1,8 @@
 using System.Linq.Expressions;
 using Microsoft.Extensions.Caching.Memory;
-using Pneumatic.Domain.Events;
+using Pneumatic.Clean.Domain.Events;
 
-namespace Pneumatic.Domain.Repositories;
+namespace Pneumatic.Clean.Domain.Repositories;
 
 // TODO: eventually configure this to use a RepoConfig (with cache settings, etc)
 public class Repository<TContext>(

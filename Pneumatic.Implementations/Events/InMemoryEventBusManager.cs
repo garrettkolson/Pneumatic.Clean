@@ -1,6 +1,6 @@
 using System.Collections.Concurrent;
-using Pneumatic.Domain;
-using Pneumatic.Domain.Events;
+using Pneumatic.Clean.Domain;
+using Pneumatic.Clean.Domain.Events;
 
 namespace Pneumatic.Implementations.Events;
 
