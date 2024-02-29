@@ -4,13 +4,12 @@ using Pneumatic.Domain.Events;
 
 namespace Pneumatic.Domain.Repositories;
 
-// TODO: need to decide if trying to map DomainModel to DatabaseModel is worth it,
-// TODO: or if it's fine to just use the DomainModel as a DatabaseModel
-public abstract class RepositoryBase(
+// TODO: eventually configure this to use a RepoConfig (with cache settings, etc)
+public class Repository<TContext>(
         IEventBusManager eventBus,
         IMemoryCache cache,
         IDatabaseContext databaseContext)
-    : IRepository
+    : IRepository where TContext : IDatabaseContext
 {
     public async Task<T?> GetById<T>(int id) where T : DomainModel
     {
@@ -40,7 +39,7 @@ public abstract class RepositoryBase(
         Expression<Func<T, bool>> predicate, 
         Expression<Func<T, TResult>> transformFunction) where T : DomainModel
     {
-        var hash = $"{predicate.GetHashCode()}-{typeof(TResult)}";
+        var hash = $"{predicate.GetHashCode()}-{transformFunction.GetHashCode()}";
         return await cache.GetOrCreateAsync(hash, async entry =>
         {
             if (await databaseContext.FirstOrDefaultTransformed(predicate, transformFunction) is not { } value) 
@@ -50,8 +49,12 @@ public abstract class RepositoryBase(
             return value;
         });
     }
+    
+    // TODO: figure out how to best cache the results (is the predicate hash code going to be performant enough?),
+    // TODO: do we have to split up the results in the list methods so each one can be accessed independently of the list?
+    // TODO: seems like that would probably introduce a lot of additional code for not much benefit?
 
-    public async Task<List<T>> ToList<T>(Expression<Func<T, bool>> predicate) where T : DomainModel
+    public async Task<List<T>> List<T>(Expression<Func<T, bool>> predicate) where T : DomainModel
     {
         var hash = predicate.GetHashCode();
         return await cache.GetOrCreateAsync(hash, async entry =>
@@ -63,20 +66,25 @@ public abstract class RepositoryBase(
         }) ?? new();
     }
 
-    public async Task<List<TResult>> ToListTransformed<T, TResult>(
+    public async Task<List<TResult>> ListTransformed<T, TResult>(
         Expression<Func<T, bool>> predicate, 
         Expression<Func<T, TResult>> transformFunction) where T : DomainModel
     {
-        throw new NotImplementedException();
+        var hash = $"{predicate.GetHashCode()}-{transformFunction.GetHashCode()}";
+        return await cache.GetOrCreateAsync(hash, async entry =>
+        {
+            if (await databaseContext.ToListTransformed(predicate, transformFunction) is not { } value)
+                return new List<TResult>();
+            entry.Value = value;
+            entry.SlidingExpiration = TimeSpan.FromSeconds(10);
+            return value;
+        }) ?? new();
     }
 
     public async Task<bool> Any<T>(Expression<Func<T, bool>> predicate)
     {
-        throw new NotImplementedException();
+        return await databaseContext.Any(predicate);
     }
-
-    // TODO: figure out how to best cache the results (is the predicate hash code going to be performant enough?),
-    // TODO: probably have to split up the results in the list methods so each one can be accessed independently of the list
 
     public async Task Add<T>(T entity) where T : DomainModel
     {

@@ -3,7 +3,7 @@ namespace Pneumatic.Domain.Events;
 public delegate Task AsyncEventHandler<in TEvent>(object sender, TEvent @event)
     where TEvent : EventArgs;
 
-internal static class AsyncEventHandlerExtensions
+public static class AsyncEventHandlerExtensions
 {
     public static async Task InvokeAsync<TEvent>(this AsyncEventHandler<TEvent>? eventHandler,
         object sender, TEvent @event)
@@ -11,7 +11,20 @@ internal static class AsyncEventHandlerExtensions
     {
         if (eventHandler != null)
         {
-            // TODO: see if we can configure if the invocation list gets called sync/async
+            foreach (var invocation in eventHandler.GetInvocationList())
+            {
+                if (invocation is not AsyncEventHandler<TEvent> handlerInstance) return;
+                await handlerInstance(sender, @event).ConfigureAwait(false);
+            }
+        }
+    }
+
+    public static async Task InvokeConcurrent<TEvent>(this AsyncEventHandler<TEvent>? eventHandler,
+        object sender, TEvent @event)
+        where TEvent : EventArgs
+    {
+        if (eventHandler != null)
+        {
             await Task.WhenAll(eventHandler.GetInvocationList().Select(async invocation =>
             {
                 if (invocation is not AsyncEventHandler<TEvent> handlerInstance) return;

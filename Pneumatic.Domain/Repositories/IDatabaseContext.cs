@@ -2,6 +2,7 @@ using System.Linq.Expressions;
 
 namespace Pneumatic.Domain.Repositories;
 
+// TODO: be sure to implement SemaphoreSlim around any EF context access
 public interface IDatabaseContext
 {
     Task<T?> GetById<T>(int id);

@@ -10,8 +10,8 @@ public interface IRepository
     Task<TResult?> FirstOrDefaultTransformed<T, TResult>(Expression<Func<T, bool>> predicate,
         Expression<Func<T, TResult>> transformFunction) where T : DomainModel;
     
-    Task<List<T>> ToList<T>(Expression<Func<T, bool>> predicate) where T : DomainModel;
-    Task<List<TResult>> ToListTransformed<T, TResult>(Expression<Func<T, bool>> predicate,
+    Task<List<T>> List<T>(Expression<Func<T, bool>> predicate) where T : DomainModel;
+    Task<List<TResult>> ListTransformed<T, TResult>(Expression<Func<T, bool>> predicate,
         Expression<Func<T, TResult>> transformFunction) where T : DomainModel;
     
     Task<bool> Any<T>(Expression<Func<T, bool>> predicate);

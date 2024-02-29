@@ -6,6 +6,8 @@ namespace Pneumatic.Implementations.Events;
 
 public class InMemoryEventBusManager : IEventBusManager
 {
+    // TODO: write a way to configure if events should be dispatched concurrently or not
+    
     private readonly ConcurrentDictionary<Type, AsyncEventHandler<DomainEvent>> _eventRegistry = new();
     
     private readonly ConcurrentDictionary<Type, AsyncEventHandler<DomainEvent>> _addRegistry = new();
@@ -15,7 +17,7 @@ public class InMemoryEventBusManager : IEventBusManager
     public async Task PublishEvent<T>(T @event) where T : DomainEvent
     {
         if (!_eventRegistry.TryGetValue(typeof(T), out var handler)) return;
-        await handler.Invoke(this, @event);
+        await handler.InvokeAsync(this, @event);
     }
 
     public async Task SubscribeToEvent<T>(AsyncEventHandler<DomainEvent> handler) where T : DomainEvent
@@ -30,7 +32,7 @@ public class InMemoryEventBusManager : IEventBusManager
     {
         if (!getRegistry(type).TryGetValue(typeof(T), out var typeEvent)) return;
         DomainEvent domainEvent = new(entity);
-        await typeEvent.Invoke(this, domainEvent);
+        await typeEvent.InvokeAsync(this, domainEvent);
     }
 
     public async Task SubscribeToEntity<T>(EventType type, AsyncEventHandler<DomainEvent> handler) where T : DomainModel
