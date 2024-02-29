@@ -9,7 +9,7 @@ public class Repository<TContext>(
         IEventBusManager eventBus,
         IMemoryCache cache,
         IDatabaseContext databaseContext)
-    : IRepository where TContext : IDatabaseContext
+    : IReadRepository, IWriteRepository where TContext : IDatabaseContext
 {
     public async Task<T?> GetById<T>(int id) where T : DomainModel
     {

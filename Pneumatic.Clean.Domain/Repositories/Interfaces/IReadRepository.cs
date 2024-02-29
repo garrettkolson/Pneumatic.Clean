@@ -2,7 +2,7 @@ using System.Linq.Expressions;
 
 namespace Pneumatic.Clean.Domain.Repositories;
 
-public interface IRepository
+public interface IReadRepository
 {
     Task<T?> GetById<T>(int id) where T : DomainModel;
     
@@ -15,8 +15,4 @@ public interface IRepository
         Expression<Func<T, TResult>> transformFunction) where T : DomainModel;
     
     Task<bool> Any<T>(Expression<Func<T, bool>> predicate);
-    
-    Task Add<T>(T entity) where T : DomainModel;
-    Task Update<T>(T entity) where T : DomainModel;
-    Task Delete<T>(T entity) where T : DomainModel;
 }
