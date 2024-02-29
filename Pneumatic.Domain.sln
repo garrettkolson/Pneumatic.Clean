@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pneumatic.Clean.Domain", "Pneumatic.Clean.Domain\Pneumatic.Clean.Domain.csproj", "{63EB7DFC-7DF2-487B-A993-93DAAD348C62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pneumatic.Implementations", "Pneumatic.Implementations\Pneumatic.Implementations.csproj", "{63A206CF-3A75-42D0-B9E7-436D3BE078C2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pneumatic.Clean.Infrastructure", "Pneumatic.Clean.Infrastructure\Pneumatic.Clean.Infrastructure.csproj", "{63A206CF-3A75-42D0-B9E7-436D3BE078C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

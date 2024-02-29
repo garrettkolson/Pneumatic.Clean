@@ -2,7 +2,7 @@ using System.Collections.Concurrent;
 using Pneumatic.Clean.Domain;
 using Pneumatic.Clean.Domain.Events;
 
-namespace Pneumatic.Implementations.Events;
+namespace Pneumatic.Clean.Infrastructure.Events;
 
 public class InMemoryEventBusManager : IEventBusManager
 {
