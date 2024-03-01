@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 namespace Pneumatic.Clean.Domain.Repositories;
 
 // TODO: be sure to implement SemaphoreSlim around any EF context access
+// TODO: should this be implemented per aggregate? or per domain?
 public interface IDatabaseContext
 {
     Task<T?> GetById<T>(int id);

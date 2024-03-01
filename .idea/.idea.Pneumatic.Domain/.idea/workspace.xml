@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0bd98e91-08c2-437c-8da2-f1b94a36ee02" name="Changes" comment="renamed solution to Pneumatic.Clean">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Pneumatic.Domain/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="0bd98e91-08c2-437c-8da2-f1b94a36ee02" name="Changes" comment="separated read and write repositories into separate interfaces,">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Pneumatic.Domain/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Pneumatic.Domain/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pneumatic.Clean.Domain/Caching/CacheSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pneumatic.Clean.Domain/Caching/CacheSettings.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pneumatic.Clean.Domain/Repositories/IDatabaseContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pneumatic.Clean.Domain/Repositories/Interfaces/IDatabaseContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pneumatic.Clean.Domain/Repositories/IRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pneumatic.Clean.Domain/Repositories/Interfaces/IRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pneumatic.Clean.Domain/Repositories/RepositoryBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pneumatic.Clean.Domain/Repositories/RepositoryBase.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,9 +19,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Users/garrettolson/RiderProjects/Pneumatic.Domain/Pneumatic.Clean.Domain/Caching/CacheSettings.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pneumatic.Clean.Domain/Caching/CacheSettings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pneumatic.Clean.Domain/Events/AsyncEventHandler.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Pneumatic.Clean.Domain/Repositories/IDatabaseContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pneumatic.Clean.Domain/Repositories/Interfaces/IDatabaseContext.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pneumatic.Clean.Domain/Repositories/RepositoryBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pneumatic.Clean.Infrastructure/Events/InMemoryEventBusManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///Users/garrettolson/RiderProjects/Pneumatic.Domain/Pneumatic.Domain/Events/AsyncEventHandler.cs" root0="SKIP_HIGHLIGHTING" />
@@ -69,7 +70,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1708832832888</updated>
-      <workItem from="1708832834035" duration="19020000" />
+      <workItem from="1708832834035" duration="20814000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit, added DomainModel.cs, IRepository.cs, IEventBusManager.cs, and EventTypes">
       <option name="closed" value="true" />
@@ -127,7 +128,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709174230952</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="separated read and write repositories into separate interfaces,">
+      <option name="closed" value="true" />
+      <created>1709184230868</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1709184230868</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -144,6 +153,7 @@
     <MESSAGE value="renamed domain project to Pneumatic.Clean.Domain, adjusted namespaces" />
     <MESSAGE value="renamed infrastructure proj to Pneumatic.Clean.Infrastructure, adjusted namespaces" />
     <MESSAGE value="renamed solution to Pneumatic.Clean" />
-    <option name="LAST_COMMIT_MESSAGE" value="renamed solution to Pneumatic.Clean" />
+    <MESSAGE value="separated read and write repositories into separate interfaces," />
+    <option name="LAST_COMMIT_MESSAGE" value="separated read and write repositories into separate interfaces," />
   </component>
 </project>

@@ -5,11 +5,11 @@ using Pneumatic.Clean.Domain.Events;
 namespace Pneumatic.Clean.Domain.Repositories;
 
 // TODO: eventually configure this to use a RepoConfig (with cache settings, etc)
-public class Repository<TContext>(
+public abstract class RepositoryBase(
         IEventBusManager eventBus,
         IMemoryCache cache,
         IDatabaseContext databaseContext)
-    : IReadRepository, IWriteRepository where TContext : IDatabaseContext
+    : IReadRepository, IWriteRepository 
 {
     public async Task<T?> GetById<T>(int id) where T : DomainModel
     {
