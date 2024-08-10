@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using Pneumatic.Clean.Domain.Changes;
 
 namespace Pneumatic.Clean.Domain.Repositories;
 
@@ -18,7 +19,7 @@ public interface IDatabaseContext
     
     Task<bool> Any<T>(Expression<Func<T, bool>> predicate);
     
-    Task<bool> Add<T>(T entity);
-    Task<bool> Update<T>(T entity);
-    Task<bool> Delete<T>(T entity);
+    Task<List<ChangedField>> Add<T>(T entity);
+    Task<List<ChangedField>> Update<T>(T entity);
+    Task<List<ChangedField>> Delete<T>(T entity);
 }

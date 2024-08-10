@@ -2,9 +2,9 @@ using System.Linq.Expressions;
 
 namespace Pneumatic.Clean.Domain.Repositories;
 
-public interface IWriteRepository
+public interface IWriteRepository<in TModelBase> where TModelBase : DomainModel
 {
-    Task Add<T>(T entity) where T : DomainModel;
-    Task Update<T>(T entity) where T : DomainModel;
-    Task Delete<T>(T entity) where T : DomainModel;
+    Task Add<T>(T entity) where T : TModelBase;
+    Task Update<T>(T entity) where T : TModelBase;
+    Task Delete<T>(T entity) where T : TModelBase;
 }

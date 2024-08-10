@@ -6,15 +6,16 @@ namespace Pneumatic.Clean.Infrastructure.Events;
 
 public class InMemoryEventBusManager : IEventBusManager
 {
+    // TODO: add logging
     // TODO: write a way to configure if events should be dispatched concurrently or not
     
     private readonly ConcurrentDictionary<Type, AsyncEventHandler<DomainEvent>> _eventRegistry = new();
     
-    private readonly ConcurrentDictionary<Type, AsyncEventHandler<DomainEvent>> _addRegistry = new();
-    private readonly ConcurrentDictionary<Type, AsyncEventHandler<DomainEvent>> _updateRegistry = new();
-    private readonly ConcurrentDictionary<Type, AsyncEventHandler<DomainEvent>> _deleteRegistry = new();
+    private readonly ConcurrentDictionary<Type, AsyncEventHandler<EntityUpdateEvent>> _addRegistry = new();
+    private readonly ConcurrentDictionary<Type, AsyncEventHandler<EntityUpdateEvent>> _updateRegistry = new();
+    private readonly ConcurrentDictionary<Type, AsyncEventHandler<EntityUpdateEvent>> _deleteRegistry = new();
 
-    public async Task PublishEvent<T>(T @event) where T : DomainEvent
+    public async Task PublishDomainEvent<T>(T @event) where T : DomainEvent
     {
         if (!_eventRegistry.TryGetValue(typeof(T), out var handler)) return;
         await handler.InvokeAsync(this, @event);
@@ -28,14 +29,14 @@ public class InMemoryEventBusManager : IEventBusManager
             typeHandler += handler;
     }
 
-    public async Task PublishEntityEvent<T>(T entity, EventType type) where T : DomainModel
+    public async Task PublishEntityEvent(EntityUpdateEvent update, EventType type)
     {
-        if (!getRegistry(type).TryGetValue(typeof(T), out var typeEvent)) return;
-        DomainEvent domainEvent = new(entity);
-        await typeEvent.InvokeAsync(this, domainEvent);
+        if (update.EntityType == null) return;
+        if (!getRegistry(type).TryGetValue(update.EntityType, out var typeEvent)) return;
+        await typeEvent.InvokeAsync(this, update);
     }
 
-    public async Task SubscribeToEntity<T>(EventType type, AsyncEventHandler<DomainEvent> handler) where T : DomainModel
+    public async Task SubscribeToEntity<T>(EventType type, AsyncEventHandler<EntityUpdateEvent> handler) where T : DomainModel
     {
         var registry = getRegistry(type);
         if (!registry.TryGetValue(typeof(T), out var typeHandler))
@@ -44,7 +45,7 @@ public class InMemoryEventBusManager : IEventBusManager
             typeHandler += handler;
     }
 
-    private ConcurrentDictionary<Type, AsyncEventHandler<DomainEvent>> getRegistry(EventType eventType)
+    private ConcurrentDictionary<Type, AsyncEventHandler<EntityUpdateEvent>> getRegistry(EventType eventType)
     {
         return eventType switch
         {
